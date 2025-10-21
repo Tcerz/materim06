@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "979462290159",
+    "project_id": "projektes06",
+    "storage_bucket": "projektes06.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:979462290159:android:93939b960b52fa3dc6391a",
+        "android_client_info": {
+          "package_name": "com.example.materim06"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIrMegcdxdl3DEGtoXQb5f7o4sdRaEdO0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
