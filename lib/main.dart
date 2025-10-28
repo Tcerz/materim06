@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:materim06/M07/login_screen.dart';
+import 'package:materim06/M07/launch.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Pastikan binding Flutter siap
+  await Firebase.initializeApp(); // 🔥 Inisialisasi Firebase dulu
   runApp(const MyApp());
 }
 
@@ -12,29 +17,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Firebase Analytics Demo',
+      initialRoute: '/login',
+      routes: {'/login': (context) => const LoginScreen()},
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const MainApp(), // 👈 Scaffold harus berada di bawah MaterialApp
-    );
-  }
-}
-
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Firebase Analytics Test')),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Analytics event triggered!')),
-            );
-          },
-          child: const Text('Send Event'),
-        ),
-      ),
+      home: LaunchScreen(), // Panggil LaunchScreen
     );
   }
 }
