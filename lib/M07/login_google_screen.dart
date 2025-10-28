@@ -1,18 +1,34 @@
-import 'package:flutter/material.dart';
+// file: login_google_screen.dart
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
-class LoginGoogleScreen extends StatelessWidget {
-  const LoginGoogleScreen({super.key});
+class LoginGoogleHelper {
+  static Future<User?> signInWithGoogle() async {
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn(
+        scopes: ['email', 'profile'],
+      );
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Login with Google')),
-      body: const Center(
-        child: Text(
-          'Halaman login menggunakan akun Google (belum diimplementasi)',
-          textAlign: TextAlign.center,
-        ),
-      ),
-    );
+      if (googleUser == null) {
+        // pengguna batal login
+        return null;
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        idToken: googleAuth.idToken,
+        accessToken: googleAuth.accessToken,
+      );
+
+      final userCredential = await FirebaseAuth.instance.signInWithCredential(
+        credential,
+      );
+      return userCredential.user;
+    } catch (e) {
+      throw Exception("Login Google gagal: $e");
+    }
   }
 }

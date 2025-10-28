@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:materim06/M07/auth.dart';
 import 'package:materim06/M07/home.dart';
 import 'package:materim06/M07/signup_screen.dart';
-// Tambahkan import di atas
 import 'package:materim06/M07/login_phone_screen.dart';
-import 'package:materim06/M07/login_google_screen.dart';
+import 'package:materim06/M07/login_google_screen.dart'; // ✅ tambahkan ini
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -135,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 12),
 
-                // Tombol login dengan Google
+                // ✅ Tombol login dengan Google → buka halaman baru
                 SizedBox(
                   height: 50,
                   child: OutlinedButton.icon(
@@ -149,19 +148,31 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginGoogleScreen(),
-                        ),
-                      );
+                    onPressed: () async {
+                      setState(() => message = '');
+                      try {
+                        setState(() => message = 'Signing in with Google...');
+                        final user = await LoginGoogleHelper.signInWithGoogle();
+                        if (user != null && mounted) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomeScreen(user.uid),
+                            ),
+                          );
+                        } else {
+                          setState(() => message = 'Login dibatalkan.');
+                        }
+                      } catch (e) {
+                        setState(() => message = e.toString());
+                      }
                     },
                   ),
                 ),
 
                 if (message.isNotEmpty)
                   Container(
+                    margin: const EdgeInsets.only(top: 20),
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: Colors.red.shade50,
