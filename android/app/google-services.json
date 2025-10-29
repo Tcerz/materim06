@@ -12,7 +12,20 @@
           "package_name": "com.example.materim06"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "979462290159-45visvj40a74a3bnroucvpk9gr6av1td.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.materim06",
+            "certificate_hash": "5381fc9748acf426c37d315df17ddc7be7ba6534"
+          }
+        },
+        {
+          "client_id": "979462290159-m40vdk6v3jr6i55nrd62t3blcoggjk44.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDIrMegcdxdl3DEGtoXQb5f7o4sdRaEdO0"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "979462290159-m40vdk6v3jr6i55nrd62t3blcoggjk44.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
